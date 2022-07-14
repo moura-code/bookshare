@@ -31,7 +31,7 @@ const UserShema = new mongoose.Schema({
     username: {
         type:String,
         require : [true, "must provide a username"],
-        minlength : [6, "username cant be less than 6 charactes"]
+        minlength : [3, "username cant be less than 6 charactes"]
     },
     hash:String,
     salt:String,

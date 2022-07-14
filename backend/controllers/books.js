@@ -1,4 +1,4 @@
-const {Books} = require('../db/conection')
+const {Books} = require('../config/db/conection')
 
 const allbooks = async(req,res)=>{
     all = await Books.find()

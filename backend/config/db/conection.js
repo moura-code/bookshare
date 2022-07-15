@@ -13,13 +13,13 @@ const conectionDB = async ()=>{
 }
 
 const bookShema= new mongoose.Schema({
-    user:{
+    userid:{
         type:String,
-        require: true
+        required: true
     },
     title:{
         type:String,
-        require : [true, "must provide a title"],
+        required : [true, "must provide a title"],
         maxlength: [20, "title cant be more than 20 characters"]
     },
     content:{
@@ -30,11 +30,12 @@ const bookShema= new mongoose.Schema({
 const UserShema = new mongoose.Schema({
     username: {
         type:String,
-        require : [true, "must provide a username"],
+        required : [true, "must provide a username"],
         minlength : [3, "username cant be less than 6 charactes"]
     },
     hash:String,
     salt:String,
+    listofBooks: []
 })
 
 const User = mongoose.model('User', UserShema);

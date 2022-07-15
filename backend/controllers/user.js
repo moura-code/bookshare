@@ -18,7 +18,7 @@ const login = (req, res, next) =>{
 
             const tokenObject = utils.issueJWT(user);
 
-            res.status(200).json({ success: true, token: tokenObject.token, expiresIn: tokenObject.expires });
+            res.status(200).json({ success: true, user:user ,token: tokenObject.token, expiresIn: tokenObject.expires });
 
         } else {
 
@@ -32,45 +32,71 @@ const login = (req, res, next) =>{
     });
 }
 
-const register = (req, res) =>{
+const register = async (req, res) =>{
 
-    exist = utils.UserExist(User,req)
+    exist =  await utils.UserExist(User,req)
+    
 
-
-    if (!exist) {
-
-        res.status(401).json({ success: false, msg: "username already exist" });
-
-        } else {
+    if (exist === null) {
 
         const saltHash = utils.genPassword(req.body.password);
-        
+         
         const salt = saltHash.salt;
         const hash = saltHash.hash;
-
+        
+        try { 
         const newUser = new User({
             username: req.body.username,
             hash: hash,
             salt: salt
-        });
-
-        try {
-        
-            newUser.save()
+        }) 
+        try { 
+            await newUser.save()
                 .then((user) => {
-                    res.json({ success: true, user: user });
-                });
-
+                    const tokenObject = utils.issueJWT(user);
+                    res.status(201).json({ success: true, user:user ,token: tokenObject.token, expiresIn: tokenObject.expires });
+                })
         } catch (err) {
-
+            console.log(err)
+            res.status(401).json({ success: false, msg: 'username too short' });
+    };}catch(err){
+        
             res.json({ success: false, msg: err });
-    }
+        }
+
+        
+        
+
+        } else {
+            res.status(401).json({ success: false, msg: "username already exist" });
 }};
 
 
+const allUsers = async(req,res)=>{
+    try{
+    all = await User.find()
+    res.status(200).json({sucess:true, all })
+    }catch(err){
+        res.status(401).json({sucess:false, err })
+    }
+}
+const idUser = async (req,res)=>{
+    try{
 
+        const id = await User.findById(req.params.id)
+
+        if ( id ) {
+             res.json({sucess:true, id})
+            }else{res.json({sucess:false , message:'id incorect'})}
+
+        }catch(err){
+            res.json({ message: err })
+        }
+}
 module.exports = {
     register,
-    login
+    login,
+    idUser,
+    allUsers
 }
 

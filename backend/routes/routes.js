@@ -1,16 +1,26 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport')
 const {
     allbooks,
     postbook,
+    idbook,
 } = require('../controllers/books');
 const {
     register,
-    login
+    login,
+    idUser,
+    allUsers
 } = require('../controllers/user');
 
-router.route('/allbooks').get(allbooks).post(postbook);
+passportAu = passport.authenticate('jwt', { session: false })
+
+
+router.route('/allbooks').get(passportAu,allbooks).post( passportAu ,postbook);
+router.route('/allbooks/:id').get(passportAu,idbook).post(passportAu,postbook);
 router.route('/user/login').post(login);
 router.route('/user/register').post(register);
+router.route('/user/').get(passportAu, allUsers);
+router.route('/user/:id').get(passportAu, idUser);
 
-module.exports = router
+module.exports = router 

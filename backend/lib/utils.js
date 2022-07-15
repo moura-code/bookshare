@@ -24,10 +24,18 @@ function genPassword(password) {
 }
 
 async function UserExist (User,req) {
-
-    user = await User.findOne({ username: req.body.username })
-    console.log(user)
+   user = await User.findOne({ username: req.body.username })
+   return user
 }
+
+async function BookExist (Books,req) {
+  book = await Books.findOne({ title: req.body.title })
+  if (book === null){
+    return true
+  }else{return false}
+  
+}
+
 
 function issueJWT(user) {
   const _id = user._id;
@@ -51,3 +59,4 @@ module.exports.validPassword = validPassword;
 module.exports.genPassword = genPassword;
 module.exports.issueJWT = issueJWT;
 module.exports.UserExist = UserExist
+module.exports.BookExist = BookExist

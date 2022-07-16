@@ -54,9 +54,25 @@ const idbook = async (req,res)=>{
             res.json({ message: err })
         }
 }
+
+const updatebook = async(req,res) =>{
+    try{
+        
+        const update = await Books.findByIdAndUpdate({_id:req.params.id},{content:req.body.content})
+        const id = await Books.findById(req.params.id)
+        if ( id ) {
+             res.json({sucess:true, id})
+            }else{res.json({sucess:false , message:'id incorect'})}
+
+        }catch(err){
+            res.json({ message: err })
+        }
+
+}
+ 
 module.exports = {
     allbooks,
     postbook,
     idbook,
-
+    updatebook
 }

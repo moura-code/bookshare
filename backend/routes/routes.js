@@ -5,6 +5,7 @@ const {
     allbooks,
     postbook,
     idbook,
+    updatebook,
 } = require('../controllers/books');
 const {
     register,
@@ -17,7 +18,7 @@ passportAu = passport.authenticate('jwt', { session: false })
 
 
 router.route('/allbooks').get(passportAu,allbooks).post( passportAu ,postbook);
-router.route('/allbooks/:id').get(passportAu,idbook).post(passportAu,postbook);
+router.route('/allbooks/:id').get(passportAu,idbook).put(passportAu,updatebook);
 router.route('/user/login').post(login);
 router.route('/user/register').post(register);
 router.route('/user/').get(passportAu, allUsers);

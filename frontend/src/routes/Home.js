@@ -5,8 +5,9 @@ export const Home = () => {
 
     return( 
         <div className='container'>
-          <h1>yg</h1>
-            
+          <h1>Welcome to WikiBook</h1>
+          <h2>What is WikiBook?</h2>
+            <p></p>
         </div>
     )
 }

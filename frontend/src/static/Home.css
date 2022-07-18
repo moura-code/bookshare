@@ -1,3 +1,30 @@
 .center{
-   
+    text-align: center;
+    color: #7F2CCB;
+}
+.container{
+    padding-top: 50px;
+   }
+body{
+    background-color: #F7DAD9;
+}
+.principal{
+    padding-top: 12px;
+    color: #7F2CCB
+}
+.principal p{
+    font-size: 20px;
+}
+.app{
+    min-height:100vh; display:flex; flex-direction:column; 
+            justify-content:space-between
+;}
+
+@media only screen and (max-width: 600px) {
+    .title{
+        text-align: center;
+    }
+    
+    
+
 }

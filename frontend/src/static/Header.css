@@ -36,6 +36,10 @@ li::before {
     padding-right: 19px;
 
 }
+.link:hover
+{
+color: #5E4AE3;  
+}
 .icon{
   display:none
 }
@@ -56,9 +60,7 @@ li::before {
     margin-left: 0;
     margin-top: 10px;
   }
-  .link{
-    
-  }
+ 
   li::before{
     padding: 15px 0px ;
   }

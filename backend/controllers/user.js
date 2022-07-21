@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-   
+const LogOut = require('express-passport-logout');
 const User = mongoose.model('User');
 const passport = require('passport');
 const utils = require('../lib/utils');
@@ -8,7 +8,7 @@ const login = (req, res, next) =>{
     .then((user) => {
 
         if (!user) {
-            return res.status(401).json({ success: false, msg: "could not find user" });
+            return res.status(401).json({ success: false, msg: "Could not find user" });
         }
         
         // Function defined at bottom of app.js
@@ -18,11 +18,11 @@ const login = (req, res, next) =>{
 
             const tokenObject = utils.issueJWT(user);
 
-            res.status(200).json({ success: true, user:user ,token: tokenObject.token, expiresIn: tokenObject.expires });
+            res.status(200).json({ success: true, user:user._id ,token: tokenObject.token, expiresIn: tokenObject.expires });
 
         } else {
 
-            res.status(401).json({ success: false, msg: "you entered the wrong password" });
+            res.status(401).json({ success: false, msg: "You entered the wrong password" });
 
         }
 
@@ -33,7 +33,7 @@ const login = (req, res, next) =>{
 }
 
 const register = async (req, res) =>{
-
+    if (req.body.password){
     exist =  await utils.UserExist(User,req)
     
 
@@ -54,11 +54,11 @@ const register = async (req, res) =>{
             await newUser.save()
                 .then((user) => {
                     const tokenObject = utils.issueJWT(user);
-                    res.status(201).json({ success: true, user:user ,token: tokenObject.token, expiresIn: tokenObject.expires });
+                    res.status(201).json({ success: true, user:user._id ,token: tokenObject.token, expiresIn: tokenObject.expires });
                 })
         } catch (err) {
-            console.log(err)
-            res.status(401).json({ success: false, msg: 'username too short' });
+           
+            res.status(401).json({ success: false, msg: 'Username too short' });
     };}catch(err){
         
             res.json({ success: false, msg: err });
@@ -68,7 +68,9 @@ const register = async (req, res) =>{
         
 
         } else {
-            res.status(401).json({ success: false, msg: "username already exist" });
+            res.status(401).json({ success: false, msg: "Username already exist" });
+}}else{
+    res.status(401).json({ success: false, msg: "Please enter a passoword" });
 }};
 
 
@@ -87,16 +89,18 @@ const idUser = async (req,res)=>{
 
         if ( id ) {
              res.json({sucess:true, id})
-            }else{res.json({sucess:false , message:'id incorect'})}
+            }else{res.json({sucess:false , msg:'Id incorect'})}
 
         }catch(err){
             res.json({ message: err })
         }
 }
+
 module.exports = {
     register,
-    login,
+    login, 
     idUser,
-    allUsers
+    allUsers,
+   
 }
 

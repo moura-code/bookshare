@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import "../static/Form.css";
 import { AppContext } from "../context/appContext";
-export const Register = () => {
-  const { password, setPassword, username, setUsername, register } =
+export const Login = () => {
+  const { password, setPassword, username, setUsername, login } =
     useContext(AppContext);
   return (
     <form>
       <div className="form container">
-        <h1 className="center">Register</h1>
+        <h1 className="center">Login</h1>
         <hr className="line"></hr>
         <div>
           <input
@@ -28,7 +28,7 @@ export const Register = () => {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={register}
+          onClick={login}
           disabled={!(username && password)}
         >
           Submit

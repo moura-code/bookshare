@@ -11,7 +11,8 @@ const {
     register,
     login,
     idUser,
-    allUsers
+    allUsers,
+    logout
 } = require('../controllers/user');
 
 passportAu = passport.authenticate('jwt', { session: false })

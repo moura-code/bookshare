@@ -1,9 +1,11 @@
 .center{
     text-align: center;
     color: #7F2CCB;
+    padding-bottom: 10px;
+   
 }
 .container{
-    padding-top: 50px;
+    margin-top: 50px;
    }
 body{
     background-color: #F7DAD9;

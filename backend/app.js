@@ -5,7 +5,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const  { conectionDB }  = require('./config/db/conection.js')
 const books = require('./routes/routes')
- 
+
 require('dotenv').config()
 require('./config/passport')(passport);
 
@@ -14,6 +14,7 @@ app.use(passport.initialize());
 // Instead of using body-parser middleware, use the new Express implementation of the same thing
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
 
 // Allows our Angular application to make HTTP requests to Express application
 app.use(cors());

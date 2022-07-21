@@ -6,20 +6,20 @@
     justify-content: space-between;
     box-shadow: 0 0 7px 5px #222
   }
-ul{
+  .ulheader{
     list-style-type: none;
     display: flex;
     padding-right: 20px;
     height:100%;
     margin:10px;
   }
-li {
+.liheader {
     font-size: 20px;
 
     
   }
   
-li::before {
+ .liheader::before {
     content: '';
     padding: 0px 30px ;
     margin: 10px;
@@ -46,6 +46,7 @@ color: #5E4AE3;
 
 @media only screen and (max-width: 600px) {
   .links{
+    z-index: 2;
     position: absolute;
     display: block;
     width: 100%;
@@ -61,7 +62,7 @@ color: #5E4AE3;
     margin-top: 10px;
   }
  
-  li::before{
+  .liheader::before{
     padding: 15px 0px ;
   }
   label > span {

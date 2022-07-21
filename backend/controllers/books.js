@@ -32,12 +32,12 @@ const postbook =  async (req,res) =>{
 
         }catch(err){
             
-            res.status(401).json({sucess:false, err})
+            res.status(401).json({sucess:false, msg:err})
         }
         }catch(err){
-            res.status(401).json({sucess:false, err})
+            res.status(401).json({sucess:false, msg:err})
         }}else{
-            res.status(401).json({ sucess: false, msg: "book title already exist" });
+            res.status(401).json({ sucess: false, msg: "Book title already exist" });
         }
 
 }
@@ -48,10 +48,10 @@ const idbook = async (req,res)=>{
 
         if ( id ) {
              res.json({sucess:true, id})
-            }else{res.json({sucess:false , message:'id incorect'})}
+            }else{res.json({sucess:false , msg:'Id incorect'})}
 
         }catch(err){
-            res.json({ message: err })
+            res.json({ msg: err })
         }
 }
 
@@ -62,10 +62,10 @@ const updatebook = async(req,res) =>{
         const id = await Books.findById(req.params.id)
         if ( id ) {
              res.json({sucess:true, id})
-            }else{res.json({sucess:false , message:'id incorect'})}
+            }else{res.json({sucess:false , msg:'Id incorect'})}
 
         }catch(err){
-            res.json({ message: err })
+            res.json({ msg: err })
         }
 
 }

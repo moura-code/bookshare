@@ -8,6 +8,7 @@ export const Footer = () => {
        
         <div className='footer'>
            <h4 className='copyright'>&#169;This page was made by Joao Calado</h4>
+           <a href='https://github.com/moura-code' target={"_blank"} rel="noreferrer" ><i className="fa fa-github" ></i></a>
         </div>
        
     )

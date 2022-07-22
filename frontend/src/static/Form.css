@@ -1,31 +1,27 @@
-.form{
-    background-color: whitesmoke;
-    border-radius: 20px;
-   
-    box-shadow: 0 0 10px 2px #222;
-    height: calc(100vh - 200px);
-    width: 80%;
-    align-items: center;
-    padding-top: 6%;
-    text-align: center;
+.form {
+  background-color: whitesmoke;
+  border-radius: 20px;
+
+  box-shadow: 0 0 10px 2px #222;
+  height: calc(100vh - 200px);
+  width: 80%;
+  align-items: center;
+  padding-top: 6%;
+  text-align: center;
 }
-.form div{
-    padding-bottom: 10px;
+.form div {
+  padding-bottom: 10px;
 }
 
-.line{
-    border-bottom: black ;
-    
-    text-align: center;
-    
+.line {
+  border-bottom: black;
+
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
-    .form{
-        height: 8%;
+  .form {
+    height: 8%;
     padding-bottom: 6%;
-    }
-    
-    
-
+  }
 }

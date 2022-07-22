@@ -7,12 +7,13 @@ export function BOOK({ children }) {
   const userId = localStorage.getItem("user");
   const [loding, setloding] = useState(false);
   const [infomation, setInformation] = useState({});
+  const [mybooks, setmybooks] = useState([]);
   useEffect(() => {
     return () => {
       if (token) {
         const getinformation = async (userId) => {
           setloding(true);
-          const u = await axios.get(
+          const info = await axios.get(
             "http://localhost:5000/api/books/user/" + userId,
             {
               headers: {
@@ -20,17 +21,32 @@ export function BOOK({ children }) {
               },
             }
           );
-          setInformation(await u);
+          setInformation(info);
+
+          const my = info.data.id.listofBooks.map(async (id) => {
+            const valor = await axios.get(
+              "http://localhost:5000/api/books/allbooks/" + id,
+              {
+                headers: {
+                  Authorization: token,
+                },
+              }
+            );
+            return valor.data.id;
+          });
+          const mybook = await Promise.all(my);
+          setmybooks(mybook);
+
           setloding(false);
         };
         getinformation(userId);
       } else {
       }
     };
-  }, []);
+  }, [userId, token]);
 
   return (
-    <BookContext.Provider value={{ loding, userId, infomation }}>
+    <BookContext.Provider value={{ loding, userId, infomation, mybooks }}>
       {children}
     </BookContext.Provider>
   );

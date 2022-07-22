@@ -7,6 +7,7 @@ import { MesageError } from "./components/MesageError";
 import { APP } from "./context/appContext";
 import { Books } from "./routes/Books";
 import { BOOK } from "./context/BooksContext";
+import { EditBook } from "./components/EditBook";
 import {
   BrowserRouter as Router,
   Route,
@@ -23,7 +24,7 @@ function App() {
           <div className="app">
             <Routes>
               <Route
-                exact
+                
                 path="/register"
                 element={
                   localStorage.getItem("token") ? (
@@ -34,7 +35,7 @@ function App() {
                 }
               />
               <Route
-                exact
+                
                 path="/login"
                 element={
                   localStorage.getItem("token") ? (
@@ -45,8 +46,9 @@ function App() {
                 }
               />
               <Route exact path="/" element={<Home />} />
-
+              
               <Route exact path="/books" element={<Books />} />
+              <Route exact path="/books/:id" element={<EditBook />} />
             </Routes>
           </div>
           <Footer />

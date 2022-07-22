@@ -1,31 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { BookContext } from "../context/BooksContext";
-import { useNavigate } from "react-router-dom";
-
+import { Mybooks } from "../components/Mybooks";
+import Spinner from "react-bootstrap/Spinner";
 import "../static/Books.css";
 export const Books = () => {
-  const navigate = useNavigate();
-  const { infomation, loding } = useContext(BookContext);
+  const { loding } = useContext(BookContext);
 
-  try {
-    return (
-      <div>
-        {loding ? (
-          <h2>loading</h2>
-        ) : (
-          <div className="mybooks">
-            <ul className="ulbooks">
-              {infomation.data.id.listofBooks.map((item) => (
-                // Presently we only fetch
-                // title from the API
-                <h4>hrt</h4>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    );
-  } catch {
-    navigate("/");
-  }
+  return (
+    <div>
+      {loding ? (
+        <div className="absolute">
+          <Spinner animation="border" variant="primary" size="xxl" />
+        </div>
+      ) : (
+        <>
+          <Mybooks />
+        </>
+      )}
+    </div>
+  );
 };

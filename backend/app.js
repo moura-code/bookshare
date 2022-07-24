@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Allows our Angular application to make HTTP requests to Express application
-app.use(cors());
+app.use(cors('http://localhost:3000/'));
 
 app.use("/api/books", books);
 

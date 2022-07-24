@@ -17,7 +17,7 @@ const {
 
 passportAu = passport.authenticate("jwt", { session: false });
 
-router.route("/allbooks").get(passportAu, allbooks).post(passportAu, postbook);
+router.route("/allbooks").get(passportAu, allbooks).post(passportAu,postbook);
 router
   .route("/allbooks/:id")
   .get(passportAu, idbook)

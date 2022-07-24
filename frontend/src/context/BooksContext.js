@@ -3,7 +3,7 @@ import axios from "axios";
 import { AppContext } from "./appContext";
 export const BookContext = createContext([]);
 export function BOOK({ children }) {
-  const { err, seterr } = useContext(AppContext);
+  const { seterr, navigate } = useContext(AppContext);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user");
   const [loding, setloding] = useState(false);
@@ -12,6 +12,7 @@ export function BOOK({ children }) {
   const [content, setcontent] = useState("");
   const [bok, setnok] = useState([]);
   const [title, settitle] = useState("");
+
   const getinformation = async (userId) => {
     const info = await axios.get(
       "http://localhost:5000/api/books/user/" + userId,
@@ -33,14 +34,11 @@ export function BOOK({ children }) {
       return valor.data.id;
     });
     const mybook = await Promise.all(my);
-    const allboks = axios.get(
-      "http://localhost:5000/api/books/allbooks/",
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
+    const allboks = axios.get("http://localhost:5000/api/books/allbooks/", {
+      headers: {
+        Authorization: token,
+      },
+    });
     const c = await allboks;
     setloding(true);
     setnok(c.data.all);
@@ -48,16 +46,49 @@ export function BOOK({ children }) {
     setmybooks(mybook);
     setloding(false);
   };
+  const newBook = async () => {
+    const name = await axios.get(
+      "http://localhost:5000/api/books/user/" + userId,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
 
+    axios
+      .post(
+        "http://localhost:5000/api/books/allbooks/",
+        {
+          userid: userId,
+          title: title,
+          content: content,
+          username: name.data.id.username,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((user) => {
+        console.log(user);
+        seterr("");
+        navigate("/");
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        seterr(err.response.data.msg);
+      });
+  };
 
   useEffect(() => {
-    
-      if (token) {
-        getinformation(userId);
-      } else {
-      
-    };
-  }, [token,userId]);
+    if (token) {
+      getinformation(userId);
+    } else {
+    }
+  }, [token, userId]);
 
   return (
     <BookContext.Provider
@@ -70,6 +101,10 @@ export function BOOK({ children }) {
         setcontent,
         title,
         settitle,
+        newBook,
+        token,
+        seterr,
+        navigate,
       }}
     >
       {children}

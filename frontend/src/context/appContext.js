@@ -50,8 +50,9 @@ export function APP({ children }) {
       .then((user) => {
         localStorage.setItem("token", user.data.token);
 
-        localStorage.setItem("user", user.data.user);
-        setlocal(true);
+        localStorage.setItem("user", user.data.user)
+        
+        setlocal(true); 
         seterr("");
         navigate("/");
         window.location.reload(false);
@@ -74,6 +75,7 @@ export function APP({ children }) {
         loged,
         login,
         logout,
+        navigate,
       }}
     >
       {children}

@@ -11,6 +11,7 @@ const allbooks = async (req, res) => {
   }
 };
 const postbook = async (req, res) => {
+  
   itExist = await BookExist(Books, req);
   if (itExist) {
     try {
@@ -39,6 +40,7 @@ const postbook = async (req, res) => {
   }
 };
 const idbook = async (req, res) => {
+  
   try {
     const id = await Books.findById(req.params.id);
     if (id) {
@@ -53,9 +55,10 @@ const idbook = async (req, res) => {
 
 const updatebook = async (req, res) => {
   try {
-    const update = await Books.findByIdAndUpdate(
+    await Books.findByIdAndUpdate(
       { _id: req.params.id },
-      { content: req.body.content }
+      { content: req.body.content },
+      { title: req.body.content }
     );
     const id = await Books.findById(req.params.id);
     if (id) {

@@ -48,6 +48,7 @@ export const Books = () => {
             <ul className="allbooks">
               {allbooks.map((item, index) => (
                 <li key={index}>
+                  <h3>{item.title}</h3>
                   <p>
                     Book by user{" "}
                     {item.username.charAt(0).toUpperCase() +

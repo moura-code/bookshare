@@ -79,7 +79,7 @@ const register = async (req, res) => {
       res.status(401).json({ success: false, msg: "Username already exist" });
     }
   } else {
-    res.status(401).json({ success: false, msg: "Please enter a passoword" });
+    res.status(401).json({ success: false, msg: "Please enter a password" });
   }
 };
 

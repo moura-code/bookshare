@@ -15,12 +15,12 @@ export const Home = () => {
         </p>
         <h2>Of what you can write about?</h2>
         <p>
-          You can write about anything, about your day, a joke or start writing
-          a story
+          - You can write about anything, about your day, a joke or start
+          writing a story
         </p>
         <h2>Where to start?</h2>
         <p>
-          First, create a acount in Register or login in a already created on
+          - First, create a acount in Register or login in a already created on
           Login and them press in Books to write or change a book for your first
           time
         </p>

@@ -1,7 +1,7 @@
 .form {
   background-color: whitesmoke;
   border-radius: 20px;
-
+ 
   box-shadow: 0 0 10px 2px #222;
   height: calc(100vh - 200px);
   width: 80%;
@@ -25,3 +25,29 @@
     padding-bottom: 6%;
   }
 }
+.form2 {
+  background-color: whitesmoke;
+  border-radius: 20px;
+ 
+  box-shadow: 0 0 10px 2px #222;
+  height: calc(100vh - 200px);
+  width: 80%;
+  align-items: center;
+  padding-top: 6%;
+
+}
+.form2 div {
+  padding-bottom: 10px;
+}
+.inputs input{
+  margin-bottom: 10px;
+  width: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+  .form2 {
+    height: calc(100vh - 400px);
+    padding-bottom: 6%;
+  }
+}
+

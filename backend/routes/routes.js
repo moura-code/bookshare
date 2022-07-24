@@ -12,7 +12,7 @@ const {
   login,
   idUser,
   allUsers,
-  logout,
+  
 } = require("../controllers/user");
 
 passportAu = passport.authenticate("jwt", { session: false });

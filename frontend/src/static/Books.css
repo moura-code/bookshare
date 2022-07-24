@@ -16,6 +16,7 @@
 }
 
 .icon2 {
+  padding: 10px;
   z-index: 20;
   display: fixed;
   padding-right: 30px;
@@ -27,4 +28,62 @@
   display: absolute;
   text-align: center;
   padding-top: 100px;
+}
+.allbooks {
+  list-style-type: none;
+
+  padding-right: 20px;
+  height: 100%;
+  margin: 10px;
+}
+.allbooks > li {
+  border: #222 solid;
+  font-size: 20px;
+
+  margin-bottom: 6%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 100%;
+}
+.link2 {
+  text-decoration: none;
+  color: inherit;
+  border: solid;
+
+  padding: 2px;
+  padding-left: 19px;
+  padding-right: 19px;
+}
+.link2:hover {
+  color: #5e4ae3;
+}
+h5 {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.books {
+  background-color: whitesmoke;
+  border-radius: 20px;
+
+  box-shadow: 0 0 10px 2px #222;
+  height: calc(100vh - 200px);
+  width: 80%;
+  overflow-y: auto;
+  padding-top: 6%;
+}
+
+.books div {
+  padding-bottom: 10px;
+}
+.create{
+  width: 100%;
+  overflow-y: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .books {
+    height: 8%;
+    padding-bottom: 6%;
+  }
 }

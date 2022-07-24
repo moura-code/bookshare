@@ -7,13 +7,15 @@ import { MesageError } from "./components/MesageError";
 import { APP } from "./context/appContext";
 import { Books } from "./routes/Books";
 import { BOOK } from "./context/BooksContext";
-import { EditBook } from "./components/EditBook";
+import { EditBook } from "./routes/EditBook";
+import { Create } from "./routes/Create";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
+
 function App() {
   return (
     <Router>
@@ -47,8 +49,27 @@ function App() {
               />
               <Route exact path="/" element={<Home />} />
               
-              <Route exact path="/books" element={<Books />} />
-              <Route exact path="/books/:id" element={<EditBook />} />
+              <Route exact path="/books" element={
+                  !localStorage.getItem("token") ? (
+                    <Navigate to="/" />
+                  ) : (
+                    <Books />
+                  )
+                } />
+              <Route exact path="/books/:id" element={
+                  !localStorage.getItem("token") ? (
+                    <Navigate to="/" />
+                  ) : (
+                    <EditBook />
+                  )
+                } />
+                <Route exact path="/books/create" element={
+                  !localStorage.getItem("token") ? (
+                    <Navigate to="/" />
+                  ) : (
+                    <Create />
+                  )
+                } />
             </Routes>
           </div>
           <Footer />

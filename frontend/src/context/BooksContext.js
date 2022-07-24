@@ -1,52 +1,77 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import { AppContext } from "./appContext";
 export const BookContext = createContext([]);
 export function BOOK({ children }) {
+  const { err, seterr } = useContext(AppContext);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user");
   const [loding, setloding] = useState(false);
   const [infomation, setInformation] = useState({});
   const [mybooks, setmybooks] = useState([]);
+  const [content, setcontent] = useState("");
+  const [bok, setnok] = useState([]);
+  const [title, settitle] = useState("");
+  const getinformation = async (userId) => {
+    const info = await axios.get(
+      "http://localhost:5000/api/books/user/" + userId,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    const my = info.data.id.listofBooks.map(async (id) => {
+      const valor = await axios.get(
+        "http://localhost:5000/api/books/allbooks/" + id,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      return valor.data.id;
+    });
+    const mybook = await Promise.all(my);
+    const allboks = axios.get(
+      "http://localhost:5000/api/books/allbooks/",
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    const c = await allboks;
+    setloding(true);
+    setnok(c.data.all);
+    setInformation(info);
+    setmybooks(mybook);
+    setloding(false);
+  };
+
+
   useEffect(() => {
-    return () => {
+    
       if (token) {
-        const getinformation = async (userId) => {
-          setloding(true);
-          const info = await axios.get(
-            "http://localhost:5000/api/books/user/" + userId,
-            {
-              headers: {
-                Authorization: token,
-              },
-            }
-          );
-          setInformation(info);
-
-          const my = info.data.id.listofBooks.map(async (id) => {
-            const valor = await axios.get(
-              "http://localhost:5000/api/books/allbooks/" + id,
-              {
-                headers: {
-                  Authorization: token,
-                },
-              }
-            );
-            return valor.data.id;
-          });
-          const mybook = await Promise.all(my);
-          setmybooks(mybook);
-
-          setloding(false);
-        };
         getinformation(userId);
       } else {
-      }
+      
     };
-  }, [userId, token]);
+  }, [token,userId]);
 
   return (
-    <BookContext.Provider value={{ loding, userId, infomation, mybooks }}>
+    <BookContext.Provider
+      value={{
+        loding,
+        infomation,
+        mybooks,
+        bok,
+        content,
+        setcontent,
+        title,
+        settitle,
+      }}
+    >
       {children}
     </BookContext.Provider>
   );

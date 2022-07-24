@@ -18,6 +18,7 @@ const postbook = async (req, res) => {
         userid: req.body.userid,
         title: req.body.title,
         content: req.body.content,
+        username:req.body.username
       });
       try {
         book = await newBook.save();

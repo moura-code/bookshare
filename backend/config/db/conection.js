@@ -16,6 +16,7 @@ const bookShema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   title: {
     type: String,
     required: [true, "must provide a title"],
@@ -23,6 +24,10 @@ const bookShema = new mongoose.Schema({
   },
   content: {
     type: String,
+  },
+  username: {
+    type: String,
+    required: true,
   },
 });
 const UserShema = new mongoose.Schema({

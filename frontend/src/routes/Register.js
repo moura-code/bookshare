@@ -14,12 +14,14 @@ export const Register = () => {
             type="text"
             placeholder="Enter Username"
             value={username}
+            autoComplete="username"
             onChange={(event) => setUsername(event.target.value)}
           />
         </div>
         <div>
           <input
             type="password"
+            autoComplete="current-password"
             placeholder="Enter Password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
